@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:likee_app/models/user.dart';
 import 'package:sahlhaly_event_planner/models/user.dart';
 
 
@@ -16,9 +17,14 @@ class AuthService {
 
 
 
+
   // create user obj based on firebase user
-  AppUser _userFromFirebaseUser(User user) {
-    return user != null ? AppUser(uid: user.uid): null;
+  AppUser? _userFromFirebaseUser(User user) {
+    if (user != null) {
+      return AppUser(uid: user.uid);
+    } else {
+      return null;
+    }
   }
 
 

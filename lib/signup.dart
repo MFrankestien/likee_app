@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:likee_app/loginPage.dart';
+import 'package:likee_app/services/auth.dart';
 
 import 'Widget/bezierContainer.dart';
 
@@ -23,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String repassword='';
   String error = '';
   String insta='';
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final AuthService auth = AuthService(uid: '');
 
   Widget _backButton() {
     return InkWell(
@@ -59,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
         if (result == null) {
           setState(() {
             error = 'Please supply a valid email';
-          });,
+          });};
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 15),
