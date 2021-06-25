@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "994134907687",
+    "project_id": "likee-ea330",
+    "storage_bucket": "likee-ea330.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994134907687:android:67ee7db669fada212ee702",
+        "android_client_info": {
+          "package_name": "com.example.likee_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994134907687-ghd75g0t70b6rhp7va532lg4d1qqlrdg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.likee_app",
+            "certificate_hash": "402d572119e74b4b0242adec26cfb237c716357e"
+          }
+        },
+        {
+          "client_id": "994134907687-hp70fn0srdusk1qnrlo18heev72jvc0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTt0nJ3rnRtzw7dejNn7pwwA2ZzDhwdrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994134907687-hp70fn0srdusk1qnrlo18heev72jvc0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
