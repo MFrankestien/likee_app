@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/src/signup.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:likee_app/signup.dart';
 
 import 'Widget/bezierContainer.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+  LoginPage({Key ?key}) : super(key: key);
 
-  final String title;
 
   @override
   _LoginPageState createState() => _LoginPageState();
