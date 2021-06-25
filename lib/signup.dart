@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,15 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  final _formKey = GlobalKey<FormState>();
+  String remail='';
+  String rpassword='';
+  String repassword='';
+  String error = '';
+  String insta='';
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -36,51 +46,41 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
-
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xff1a84b8), Color(0xff2b6ff7)])),
-      child: Text(
-        'Register Now',
-        style: TextStyle(fontSize: 20, color: Colors.white),
+    return GestureDetector(
+      onTap: () async {
+      if (_formKey.currentState!.validate()) {
+        print(remail);
+        print(rpassword);
+        print(repassword);
+
+        dynamic result = await auth.registerWithEmailAndPassword(
+            remail.trim(), rpassword.toLowerCase());
+        if (result == null) {
+          setState(() {
+            error = 'Please supply a valid email';
+          });,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xff1a84b8), Color(0xff2b6ff7)])),
+        child: Text(
+          'Register Now',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
       ),
     );
   }
@@ -141,17 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ]),
     );
   }
-
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Email"),
-        _entryField("Password", isPassword: true),
-        _entryField("Confirm Password", isPassword: true),
-        _entryField("Instagram UserName"),
-      ],
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +168,119 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    _emailPasswordWidget(),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Email",
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                    validator: (val) =>
+                                    val!.isEmpty ? 'Enter an email' : null,
+                                    onChanged: (val) {
+                                      setState(() => remail = val);
+                                    },
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true))
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Password",
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                    validator: (val) => val!.length < 6
+                                        ? 'Enter a password 6+ chars long'
+                                        : null,
+                                    onChanged: (val) {
+                                      setState(() => rpassword = val);
+                                    },
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true))
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Confirm password",
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+    validator: (val) =>
+    val != rpassword ? 'not match' : null,
+    onChanged: (val) {
+    setState(() => repassword = val);
+    },
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true))
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Instagram User",
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                    initialValue: "@",
+                                    validator: (val) =>
+                                    val!.isEmpty ? 'Enter youer instagram user' : null,
+                                    onChanged: (val) {
+                                      setState(() => remail = val);
+                                    },
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true))
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
