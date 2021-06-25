@@ -24,29 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
 
   Widget _submitButton() {
     return GestureDetector(
@@ -148,14 +125,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Email id"),
-        _entryField("Password", isPassword: true),
-      ],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +178,33 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                          _emailPasswordWidget(),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Password",
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                    validator: (val) => val!.length < 6
+                                        ? 'Enter a password 6+ chars long'
+                                        : null,
+                                    onChanged: (val) {
+                                      setState(() => password = val);
+                                    },
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        fillColor: Color(0xfff3f3f4),
+                                        filled: true))
+                              ],
+                            ),
+                          ),
                         ],
                       )),
                   SizedBox(height: 20),
