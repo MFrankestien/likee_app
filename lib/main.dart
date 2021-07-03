@@ -5,6 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'loginPage.dart';
 
+bool isVisibleAllElement = false;
+String dpUrl = "";
+String posts = "";
+String followers = "";
+String following = "";
+bool isPrivate = false;
+bool isVerified = false;
+String fullName = "";
+String biography = "";
+String externalUrl = "";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
