@@ -5,6 +5,7 @@ import 'package:likee_app/AboutUS.dart';
 import 'package:likee_app/loginPage.dart';
 
 import 'package:likee_app/ContactUS.dart';
+import 'package:likee_app/payment.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -141,10 +142,7 @@ class _MainDrawerState extends State<MainDrawer> {
 
     ListTile(
     onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => profileedit()),
-      );
+
     },
     leading: Icon(
     Icons.settings,
