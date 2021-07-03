@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-import 'loginPage.dart';
+import 'Screens/loginPage.dart';
 
 bool isVisibleAllElement = false;
 String dpUrl = "";

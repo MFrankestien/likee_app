@@ -3,20 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:likee_app/RoutePage.dart';
-import 'package:likee_app/signup.dart';
+import 'ResetPass.dart';
+import 'RoutePage.dart';
+import 'signup.dart';
 
-import 'Widget/bezierContainer.dart';
+import '../Widget/bezierContainer.dart';
 
-class ContactUS extends StatefulWidget {
-  ContactUS({Key ?key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key ?key}) : super(key: key);
 
 
   @override
-  _ContactUSState createState() => _ContactUSState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _ContactUSState extends State<ContactUS> {
+class _LoginPageState extends State<LoginPage> {
   String email = '';
   String password = '';
   String error = '';
@@ -66,7 +67,7 @@ class _ContactUSState extends State<ContactUS> {
                 end: Alignment.centerRight,
                 colors: [Color(0xff1a84b8), Color(0xff2b6ff7)])),
         child: Text(
-          '',
+          'Login',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -86,9 +87,20 @@ class _ContactUSState extends State<ContactUS> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
-
-
+            Text(
+              'Don\'t have an account ?',
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Register',
+              style: TextStyle(
+                  color: Color(0xfffc7b22),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600),
+            ),
           ],
         ),
       ),
@@ -148,39 +160,69 @@ class _ContactUSState extends State<ContactUS> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    SizedBox(height:20 ,),
                                     Text(
-                                      "Send Us Email on",
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                                      "Email",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                                     ),
-                                    SizedBox(height:30 ,),
-                                    Text(
-
-                                      "Likee-Support@gmail.com",
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                                    SizedBox(
+                                      height: 10,
                                     ),
-                                    SizedBox(height:30 ,),
-                                    Text(
-                                      "Likee-Yahoo@gmail.com",
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-
-                                    ),
-                                    SizedBox(height:30
-                                      ,),
-
-                                    Text(
-                                      "Phone: 19888",
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-
-                                    ),
-
+                                    TextFormField(
+                                        validator: (val) =>
+                                        val!.isEmpty ? 'Enter an email' : null,
+                                        onChanged: (val) {
+                                          setState(() => email = val);
+                                        },
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            fillColor: Color(0xfff3f3f4),
+                                            filled: true))
                                   ],
                                 ),
                               ),
-
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Password",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextFormField(
+                                        validator: (val) => val!.length < 6
+                                            ? 'Enter a password 6+ chars long'
+                                            : null,
+                                        onChanged: (val) {
+                                          setState(() => password = val);
+                                        },
+                                        obscureText: true,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            fillColor: Color(0xfff3f3f4),
+                                            filled: true))
+                                  ],
+                                ),
+                              ),
                             ],
                           )),
-
+                      SizedBox(height: 20),
+                      _submitButton(),
+                      GestureDetector(
+                        onTap: ()=>Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => Resetpas())),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.centerRight,
+                          child: Text('Forgot Password ?',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500)),
+                        ),
+                      ),
 
 
                       SizedBox(height: height * .055),
@@ -195,3 +237,4 @@ class _ContactUSState extends State<ContactUS> {
         ));
   }
 }
+

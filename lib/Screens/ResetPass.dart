@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:likee_app/signup.dart';
+import 'signup.dart';
 
-import 'Widget/bezierContainer.dart';
+import '../Widget/bezierContainer.dart';
 
 class Resetpas extends StatefulWidget {
   Resetpas({Key ?key}) : super(key: key);

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:likee_app/AboutUS.dart';
-import 'package:likee_app/loginPage.dart';
+import '../Screens/AboutUS.dart';
+import '../Screens/loginPage.dart';
 
-import 'package:likee_app/ContactUS.dart';
-import 'package:likee_app/payment.dart';
+import '../Screens/ContactUS.dart';
+import '../Screens/payment.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);

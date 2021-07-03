@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_insta/flutter_insta.dart';
-import 'package:likee_app/Drawer.dart';
+import '../Widget/Drawer.dart';
 import 'package:likee_app/info.dart';
 import 'package:likee_app/models/firestore.dart';
 
-import 'Widget/bezierContainer.dart';
-import 'app_bar.dart';
+import '../Widget/bezierContainer.dart';
+import '../Widget/app_bar.dart';
 
 class RoutePage extends StatefulWidget {
   @override

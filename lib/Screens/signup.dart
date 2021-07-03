@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:likee_app/loginPage.dart';
+import 'loginPage.dart';
 import 'package:likee_app/services/auth.dart';
 
-import 'Widget/bezierContainer.dart';
+import '../Widget/bezierContainer.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key? key}) : super(key: key);

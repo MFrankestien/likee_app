@@ -2,8 +2,8 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
-import 'package:likee_app/RoutePage.dart';
-import 'package:likee_app/app_bar.dart';
+import 'RoutePage.dart';
+import '../Widget/app_bar.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 

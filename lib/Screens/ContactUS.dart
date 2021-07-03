@@ -1,19 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:likee_app/signup.dart';
-import 'Widget/bezierContainer.dart';
 
-class AboutUS extends StatefulWidget {
-  AboutUS({Key ?key}) : super(key: key);
+import 'package:google_fonts/google_fonts.dart';
+import 'RoutePage.dart';
+import 'signup.dart';
+
+import '../Widget/bezierContainer.dart';
+
+class ContactUS extends StatefulWidget {
+  ContactUS({Key ?key}) : super(key: key);
 
 
   @override
-  _AboutUSState createState() => _AboutUSState();
+  _ContactUSState createState() => _ContactUSState();
 }
 
-class _AboutUSState extends State<AboutUS> {
+class _ContactUSState extends State<ContactUS> {
   String email = '';
   String password = '';
   String error = '';
@@ -23,6 +26,52 @@ class _AboutUSState extends State<AboutUS> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
+  Widget _submitButton() {
+    return GestureDetector(
+      onTap: () async {
+        if (_formKey.currentState!.validate()) {
+          try{
+            dynamic result =
+            await auth.signInWithEmailAndPassword(email: email.trim(), password: password.toLowerCase());
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => RoutePage()));
+          }catch(e){
+            print(e);
+            if (e!=null){
+              setState(() {
+                error =
+                'Could not sign in with those credentials wrong Email or Password';
+              });
+            }
+          }
+
+
+        }
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xff1a84b8), Color(0xff2b6ff7)])),
+        child: Text(
+          '',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
 
   Widget _createAccountLabel() {
     return InkWell(
@@ -66,26 +115,7 @@ class _AboutUSState extends State<AboutUS> {
           ]),
     );
   }
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +129,6 @@ class _AboutUSState extends State<AboutUS> {
                   top: -height * .15,
                   right: -MediaQuery.of(context).size.width * .4,
                   child: BezierContainer()),
-
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: SingleChildScrollView(
@@ -121,10 +150,29 @@ class _AboutUSState extends State<AboutUS> {
                                   children: <Widget>[
                                     SizedBox(height:20 ,),
                                     Text(
-                                      "LIKEE is aiming to help startup vloggers and social media people , helping people that are in the beginning of their career as vloggers or influencers in getting more followers and grow their community" ,
+                                      "Send Us Email on",
                                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                                     ),
+                                    SizedBox(height:30 ,),
+                                    Text(
 
+                                      "Likee-Support@gmail.com",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                                    ),
+                                    SizedBox(height:30 ,),
+                                    Text(
+                                      "Likee-Yahoo@gmail.com",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+
+                                    ),
+                                    SizedBox(height:30
+                                      ,),
+
+                                    Text(
+                                      "Phone: 19888",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+
+                                    ),
 
                                   ],
                                 ),
@@ -141,7 +189,6 @@ class _AboutUSState extends State<AboutUS> {
                   ),
                 ),
               ),
-              Positioned(top: 40, left: 0, child: _backButton()),
 
             ],
           ),
